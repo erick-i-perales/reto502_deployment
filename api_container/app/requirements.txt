@@ -1,0 +1,8 @@
+pandas
+numpy
+fastapi
+uvicorn[standard]
+statsmodels
+pyarrow
+fastparquet
+scikit-learn
