@@ -2,7 +2,7 @@ import requests
 import pandas as pd
 import streamlit as st
 
-output_pipeline_path = 'C:/Users/DELL/Documents/workspace/deployment/pipeline_use/data/02_processed/preprocessed_data.csv'
+output_pipeline_path = 'preprocessed_data.csv'
 
 def post_request(url, files, params):
     '''
@@ -43,7 +43,7 @@ def main():
     preprocessed_data = pd.read_csv(output_pipeline_path)
     preprocessed_data['date'] = pd.to_datetime(preprocessed_data['date'])
 
-    st.dataframe(preprocessed_data, hide_index=True, use_container_width=True)
+    # st.dataframe(preprocessed_data, hide_index=True, use_container_width=True)
 
     company = st.selectbox('Company',
                             preprocessed_data.columns[1:])
@@ -54,7 +54,7 @@ def main():
                             agg_options.keys())
     aggregation = agg_options[aggregation]
 
-    num_of_predictions = st.number_input("Enter an integer number", step=1, format="%d")
+    num_of_predictions = st.number_input("Number of predictions to compute:", step=1, format="%d")
 
     series = preprocessed_data[['date', company]]
 
