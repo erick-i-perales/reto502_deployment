@@ -10,9 +10,15 @@ class HoltWinters:
         cicle = {'daily':365,'weekly':52,'biweekly':24,'monthly':12}
         
         self.time_series_grouped= dataframe
+        series = self.time_series_grouped['data']
+
+        if aggregation == 'daily':
+            self.series = series[series.first_valid_index():]
+        else:
+            self.series = series[series.ne(0).idxmax():]
+
         self.aggregation_freq = frequencies[aggregation]
         self.cicle = cicle[aggregation]
-        self.series = self.time_series_grouped['data']
         self.metrics = None
         
     def get_predictions(self, n_predictions):
