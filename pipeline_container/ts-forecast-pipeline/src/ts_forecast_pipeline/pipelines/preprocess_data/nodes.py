@@ -1,11 +1,9 @@
 import numpy as np
 import pandas as pd
-import mysql.connector
 from statsmodels.tsa.holtwinters import SimpleExpSmoothing
 from statsmodels.tsa.seasonal import seasonal_decompose
-from params import DB_HOST, DB_USER, DB_PASSWORD, DB_NAME, DB_PORT, DB_CA_FILEPATH
 
-def load_data() -> pd.DataFrame:
+def load_data(data:pd.DataFrame) -> pd.DataFrame:
     '''
     Retrive data from DB and standarize names of columns.
     Create pivot table to get time series by company ID.
@@ -16,15 +14,6 @@ def load_data() -> pd.DataFrame:
     Returns:
         pivot_data [pd.DataFrame]: Dataframe containing time series by company_id.
     '''
-    conn = mysql.connector.connect(
-                                    host = DB_HOST,
-                                    user = DB_USER,
-                                    password = DB_PASSWORD,
-                                    database = DB_NAME,
-                                    port = DB_PORT,
-                                    client_flags = [mysql.connector.ClientFlag.SSL],
-                                    ssl_ca = DB_CA_FILEPATH
-                                    )
 
     data = pd.read_sql("SELECT Fecha_hoy, ID_empresa, SUM(ing_hab) AS ing_hab FROM Ocupaciones GROUP BY Fecha_hoy, ID_empresa;", conn)
     

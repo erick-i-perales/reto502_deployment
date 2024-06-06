@@ -1,0 +1,7 @@
+raw_data:
+  type: pandas.CSVDataset
+  filepath: data/dataquery.csv
+
+preprocessed_data:
+  type: pandas.CSVDataset
+  filepath: data/preprocessed_data.csv

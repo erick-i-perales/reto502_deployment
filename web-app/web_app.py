@@ -2,7 +2,7 @@ import requests
 import pandas as pd
 import streamlit as st
 
-output_pipeline_path = 'C:/Users/DELL/Documents/workspace/deployment/pipeline_implementation/data/02_processed/preprocessed_data.csv'
+output_pipeline_path = 'C:/Users/DELL/Documents/workspace/deployment/pipeline_use/data/02_processed/preprocessed_data.csv'
 
 def post_request(url, files, params):
     '''
