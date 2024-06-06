@@ -31,5 +31,3 @@ async def create_upload_file(file: UploadFile, aggregation_freq: str, num_of_pre
     output['metrics'] = model.metrics
 
     return output
-    
-    return {pred}
