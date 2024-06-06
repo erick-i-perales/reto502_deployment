@@ -43,7 +43,7 @@ def main():
     preprocessed_data = pd.read_csv(output_pipeline_path)
     preprocessed_data['date'] = pd.to_datetime(preprocessed_data['date'])
 
-    st.dataframe(preprocessed_data, hide_index=True, use_container_width=True)
+    # st.dataframe(preprocessed_data, hide_index=True, use_container_width=True)
 
     company = st.selectbox('Company',
                             preprocessed_data.columns[1:])
