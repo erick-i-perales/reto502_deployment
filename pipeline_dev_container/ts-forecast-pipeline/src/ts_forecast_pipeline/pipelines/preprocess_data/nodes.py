@@ -14,8 +14,6 @@ def load_data(data:pd.DataFrame) -> pd.DataFrame:
     Returns:
         pivot_data [pd.DataFrame]: Dataframe containing time series by company_id.
     '''
-
-    data = pd.read_sql("SELECT Fecha_hoy, ID_empresa, SUM(ing_hab) AS ing_hab FROM Ocupaciones GROUP BY Fecha_hoy, ID_empresa;", conn)
     
     data = data.drop(data.columns[0], axis=1)
     data.columns = ['date', 'company', 'data']

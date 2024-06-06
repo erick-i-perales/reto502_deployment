@@ -3,7 +3,7 @@ import pandas as pd
 import mysql.connector
 from statsmodels.tsa.holtwinters import SimpleExpSmoothing
 from statsmodels.tsa.seasonal import seasonal_decompose
-from params import DB_HOST, DB_USER, DB_PASSWORD, DB_NAME, DB_PORT, DB_CA_FILEPATH
+from .params import DB_HOST, DB_USER, DB_PASSWORD, DB_NAME, DB_PORT, DB_CA_FILEPATH
 
 def load_data() -> pd.DataFrame:
     '''
@@ -28,7 +28,6 @@ def load_data() -> pd.DataFrame:
 
     data = pd.read_sql("SELECT Fecha_hoy, ID_empresa, SUM(ing_hab) AS ing_hab FROM Ocupaciones GROUP BY Fecha_hoy, ID_empresa;", conn)
     
-    data = data.drop(data.columns[0], axis=1)
     data.columns = ['date', 'company', 'data']
     data['date'] = pd.to_datetime(data['date'])
 

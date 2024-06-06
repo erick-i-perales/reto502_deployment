@@ -4,4 +4,3 @@ statsmodels
 kedro
 pyarrow
 fastparquet
-mysql.connector.python

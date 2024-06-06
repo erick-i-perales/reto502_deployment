@@ -9,7 +9,7 @@ def create_pipeline(**kwargs) -> Pipeline:
         [
             node(
                 func=load_data,
-                inputs='raw_data',
+                inputs=None,
                 outputs='pivot_data',
                 name='load_data_node'
             ),
