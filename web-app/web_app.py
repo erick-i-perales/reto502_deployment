@@ -43,7 +43,7 @@ def main():
     preprocessed_data = pd.read_csv(output_pipeline_path)
     preprocessed_data['date'] = pd.to_datetime(preprocessed_data['date'])
 
-    # st.dataframe(preprocessed_data, hide_index=True, use_container_width=True)
+    st.dataframe(preprocessed_data, hide_index=True, use_container_width=True)
 
     company = st.selectbox('Company',
                             preprocessed_data.columns[1:])
@@ -77,6 +77,7 @@ def main():
     # --------------------------------------------------------------------------   
 
     if st.button('Compute Predictions'):
+
         with open('data.json', 'w') as json_file:
             json_file.write(json_data)
         files = {'file': open('data.json' ,'rb')}
@@ -96,10 +97,17 @@ def main():
 
             st.write('Metrics')
             st.dataframe(metrics, hide_index=True, use_container_width=True)
+
+            csv = forecast_df.to_csv(index=False).encode('utf-8')
+            st.download_button(
+                label="Download Forecast as CSV",
+                data=csv,
+                file_name=f'forecast_{company}_{aggregation}.csv',
+                mime='text/csv'
+            )
             
         else:
             print('Failed to fetch data from API.')
-
 
 if __name__ == '__main__':
     main()
